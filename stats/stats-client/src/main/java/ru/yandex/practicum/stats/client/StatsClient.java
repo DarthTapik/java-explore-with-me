@@ -10,6 +10,8 @@ import ru.yandex.practicum.stats.dto.EndpointHitDto;
 import ru.yandex.practicum.stats.dto.StatsDto;
 
 import java.net.URI;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.List;
 public class StatsClient {
 
     private final RestTemplate restTemplate;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Value("${stats-server.url}")
     private String statsServerUrl;
@@ -33,10 +36,10 @@ public class StatsClient {
         restTemplate.postForEntity(uri, hit, Void.class);
     }
 
-    public List<StatsDto> getStats(String start, String end, List<String> uris, boolean unique) {
+    public List<StatsDto> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
         URI uri = UriComponentsBuilder.fromHttpUrl(statsServerUrl + "/stats")
-                .queryParam("start", start)
-                .queryParam("end", end)
+                .queryParam("start", start.format(formatter))
+                .queryParam("end", end.format(formatter))
                 .queryParam("unique", unique)
                 .build()
                 .toUri();
