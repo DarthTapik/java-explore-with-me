@@ -25,3 +25,24 @@ services:
       - POSTGRES_USER=dbuser
       - POSTGRES_PASSWORD=dbpass
 
+  main-server:
+    build: main-service
+    image: main-service
+    container_name: mainService
+    ports:
+      - "8080:8080"
+    depends_on:
+      - main-db
+
+    main-db:
+      image: postgres:16.1
+      container_name: mainDb
+      ports:
+        - "5433:5432"
+      volumes:
+        - ./volumes/mainDb:/var/lib/postgresql/data/
+
+      environment:
+        - POSTGRES_DB=mainDb
+        - POSTGRES_USER=dbuser
+        - POSTGRES_PASSWORD=dbpass
