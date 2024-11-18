@@ -18,7 +18,7 @@ public class StatsController {
 
     @PostMapping("/hit")
     @ResponseStatus(HttpStatus.OK)
-    public EndpointHitDto hit(@RequestBody EndpointHitDto hit){
+    public EndpointHitDto hit(@RequestBody EndpointHitDto hit) {
         statsService.endpointHit(hit);
         return hit;
     }
@@ -27,7 +27,7 @@ public class StatsController {
     @ResponseStatus(HttpStatus.OK)
     public List<StatsDto> getStats(@RequestParam String start, @RequestParam String end,
                                    @RequestParam(required = false) ArrayList<String> uris,
-                                   @RequestParam(defaultValue = "false") String unique){
+                                   @RequestParam(defaultValue = "false") String unique) {
 
         return statsService.getStats(start, end, uris, unique);
     }

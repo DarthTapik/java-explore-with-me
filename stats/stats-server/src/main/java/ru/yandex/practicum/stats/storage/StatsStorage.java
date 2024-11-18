@@ -14,11 +14,11 @@ public class StatsStorage {
 
     private final StatsRepository statsRepository;
 
-    public void addHit(EndpointHit endpointHit){
+    public void addHit(EndpointHit endpointHit) {
         statsRepository.save(endpointHit);
     }
 
-    public List<StatsDto> getStats(LocalDateTime start, LocalDateTime end, List<String> uri, boolean unique){
+    public List<StatsDto> getStats(LocalDateTime start, LocalDateTime end, List<String> uri, boolean unique) {
         if (unique) {
             return statsRepository.getStatsUnique(start, end, uri);
         } else {
@@ -26,7 +26,7 @@ public class StatsStorage {
         }
     }
 
-    public List<StatsDto> getStatsForAll(LocalDateTime start, LocalDateTime end, boolean unique){
+    public List<StatsDto> getStatsForAll(LocalDateTime start, LocalDateTime end, boolean unique) {
         if (unique) {
             return statsRepository.getStatsForAllUnique(start, end);
         } else {
