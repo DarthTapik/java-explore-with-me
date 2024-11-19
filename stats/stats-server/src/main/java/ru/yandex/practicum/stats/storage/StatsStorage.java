@@ -26,11 +26,4 @@ public class StatsStorage {
         }
     }
 
-    public List<StatsDto> getStatsForAll(LocalDateTime start, LocalDateTime end, boolean unique) {
-        if (unique) {
-            return statsRepository.getStatsForAllUnique(start, end);
-        } else {
-            return statsRepository.getStatsForAll(start, end);
-        }
-    }
 }
