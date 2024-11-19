@@ -34,13 +34,7 @@ public class StatsService {
 
         boolean uniqueBool = Boolean.valueOf(unique);
 
-        ArrayList statsDto;
-
-        if (uris == null || uris.isEmpty()) {
-            statsDto = new ArrayList(statsStorage.getStatsForAll(startTime, endTime, uniqueBool));
-        } else {
-            statsDto = new ArrayList(statsStorage.getStats(startTime, endTime, uris, uniqueBool));
-        }
+        ArrayList<StatsDto> statsDto = new ArrayList<>(statsStorage.getStats(startTime, endTime, uris, uniqueBool));
         return statsDto;
     }
 }
